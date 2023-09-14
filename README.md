@@ -1,3 +1,3 @@
 # flutter_template
 
-A new Flutter project.
+Flutter application template v. 1.0.0
