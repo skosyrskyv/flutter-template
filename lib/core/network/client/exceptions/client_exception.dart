@@ -1,4 +1,4 @@
-import 'package:flutter_template/core/network/client/error/error_model.dart';
+import 'package:flutter_template/core/network/client/error/error_model/error_model.dart';
 
 class ClientException implements Exception {
   final ErrorModel error;

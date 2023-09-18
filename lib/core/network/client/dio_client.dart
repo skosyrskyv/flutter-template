@@ -1,7 +1,7 @@
 import 'dart:developer';
 
 import 'package:dio/dio.dart';
-import 'package:flutter_template/core/network/client/error/error_model.dart';
+import 'package:flutter_template/core/network/client/error/error_model/error_model.dart';
 import 'package:flutter_template/core/network/client/exceptions/cancel_exception.dart';
 import 'package:flutter_template/core/network/client/exceptions/client_exception.dart';
 import 'package:flutter_template/core/network/client/exceptions/timeout_exception.dart';
