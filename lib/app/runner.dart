@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:flutter_template/app/app.dart';
+import 'package:flutter_template/app/app_loading.dart';
 import 'package:flutter_template/app/bloc/bloc_observer.dart';
 import 'package:flutter_template/app/localization.dart';
 import 'package:flutter_template/app/runner.config.dart';
@@ -28,8 +29,14 @@ class Runner {
     await configureDependencies();
   }
 
+  static Future<void> _initializeServices() async {
+    // TODO: Add services init.
+  }
+
   static _runApp() async {
+    runApp(const AppLoading());
     await _initializeFlutterPluginsAndDependencies();
+    await _initializeServices();
     runApp(
       const LocalizationProvider(
         child: SettingsBuilder(
