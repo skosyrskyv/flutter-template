@@ -8,7 +8,6 @@ import 'package:flutter_template/app/app_loading.dart';
 import 'package:flutter_template/app/bloc/bloc_observer.dart';
 import 'package:flutter_template/app/localization.dart';
 import 'package:flutter_template/app/runner.config.dart';
-import 'package:flutter_template/app/settings/settings_builder.dart';
 import 'package:flutter_template/core/network/client/dio_client.dart';
 import 'package:flutter_template/core/network/client/http_client.dart';
 import 'package:get_it/get_it.dart';
@@ -39,9 +38,7 @@ class Runner {
     await _initializeServices();
     runApp(
       const LocalizationProvider(
-        child: SettingsBuilder(
-          child: App(),
-        ),
+        child: App(),
       ),
     );
   }
