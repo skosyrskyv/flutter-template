@@ -1,6 +1,6 @@
 import 'http_response.dart';
 
-abstract class IHttpClient {
+abstract interface class IHttpClient {
   Future<HttpResponse> get({
     required String path,
     Map<String, dynamic>? headers,

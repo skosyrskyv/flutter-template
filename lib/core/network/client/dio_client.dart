@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:dio/dio.dart';
 import 'package:flutter_template/core/network/client/error/error_model/error_model.dart';
 import 'package:flutter_template/core/network/client/exceptions/cancel_exception.dart';
@@ -21,22 +19,20 @@ class DioClient implements IHttpClient {
 
   Future<HttpResponse> _checkResponse(Response? response) async {
     if (response == null || response.statusCode == null) {
-      throw Exception('Что-то пошло не так :(');
+      throw Exception('Response is null or status code is null');
     }
 
     if (response.statusCode! >= 500) {
-      log(response.toString());
       throw ServerException(response.data);
     }
 
     if (response.statusCode! >= 400 && response.statusCode! < 500) {
-      final data = response.data;
       throw ClientException(
-        ErrorModel.fromJson(data),
+        ErrorModel.fromJson(response.data),
       );
     }
 
-    if (response.statusCode! > 400) {
+    if (response.statusCode! < 400) {
       throw Exception(response.data);
     }
 
@@ -60,9 +56,9 @@ class DioClient implements IHttpClient {
       case DioExceptionType.badResponse:
         return await _checkResponse(error.response);
       case DioExceptionType.badCertificate:
-        throw Exception('Dio error: Bad Certificate');
+        throw Exception('Bad Certificate');
       case DioExceptionType.connectionError:
-        throw Exception('Dio error: Connection error');
+        throw Exception('Connection error');
       case DioExceptionType.unknown:
         throw Exception('Unexpected dio request error: ${error.toString()}');
     }
@@ -83,8 +79,8 @@ class DioClient implements IHttpClient {
       return await _checkResponse(response);
     } on DioException catch (error) {
       return await _errorHandler(error);
-    } catch (e) {
-      throw Exception('Unexpected dio request error');
+    } catch (exception, stacktrace) {
+      throw Error.throwWithStackTrace(exception, stacktrace);
     }
   }
 
@@ -105,8 +101,8 @@ class DioClient implements IHttpClient {
       return await _checkResponse(response);
     } on DioException catch (error) {
       return await _errorHandler(error);
-    } catch (e) {
-      throw Exception('Unexpected dio request error');
+    } catch (exception, stacktrace) {
+      throw Error.throwWithStackTrace(exception, stacktrace);
     }
   }
 
@@ -127,8 +123,8 @@ class DioClient implements IHttpClient {
       return _checkResponse(response);
     } on DioException catch (error) {
       return await _errorHandler(error);
-    } catch (e) {
-      throw Exception('Unexpected dio request error');
+    } catch (exception, stacktrace) {
+      throw Error.throwWithStackTrace(exception, stacktrace);
     }
   }
 
@@ -149,8 +145,8 @@ class DioClient implements IHttpClient {
       return _checkResponse(response);
     } on DioException catch (error) {
       return await _errorHandler(error);
-    } catch (e) {
-      throw Exception('Unexpected dio request error');
+    } catch (exception, stacktrace) {
+      throw Error.throwWithStackTrace(exception, stacktrace);
     }
   }
 
@@ -171,8 +167,8 @@ class DioClient implements IHttpClient {
       return _checkResponse(response);
     } on DioException catch (error) {
       return await _errorHandler(error);
-    } catch (e) {
-      throw Exception('Unexpected dio request error');
+    } catch (exception, stacktrace) {
+      throw Error.throwWithStackTrace(exception, stacktrace);
     }
   }
 
@@ -198,8 +194,8 @@ class DioClient implements IHttpClient {
       return _checkResponse(response);
     } on DioException catch (error) {
       return await _errorHandler(error);
-    } catch (e) {
-      throw Exception('Unexpected dio request error');
+    } catch (exception, stacktrace) {
+      throw Error.throwWithStackTrace(exception, stacktrace);
     }
   }
 }
